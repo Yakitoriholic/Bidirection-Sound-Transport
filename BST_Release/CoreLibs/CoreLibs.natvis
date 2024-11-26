@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+<Type Name="nsText::String">
+    <DisplayString Condition="0 == (_SSO.Buffer[_SSOTail] &amp; 0x80)">{_SSO.StrPos,s8}</DisplayString>
+    <DisplayString>{_SSO.Buffer,s8}</DisplayString>
+    <StringView Condition="0 == (_SSO.Buffer[_SSOTail] &amp; 0x80)">_SSO.StrPos,s8</StringView>
+    <StringView>_SSO.Buffer,s8</StringView>
+    <Expand>
+	<Item Name="length" Condition="0 == (_SSO.Buffer[_SSOTail] &amp; 0x80)">_SSO.StrLen</Item>
+        <Item Name="length" Condition="0 != (_SSO.Buffer[_SSOTail] &amp; 0x80)">size_t(_SSO.Buffer[_SSOTail] - 0x80)</Item>
+	<Item Name="capacity" Condition="0 == (_SSO.Buffer[_SSOTail] &amp; 0x80)">_SSO.MemLen - 1</Item>
+	<Item Name="capacity" Condition="0 != (_SSO.Buffer[_SSOTail] &amp; 0x80)">sizeof(_SSO) - 2</Item>
+    </Expand>
+</Type>
+
+<Type Name="nsText::String_W">
+    <DisplayString Condition="0 == (_SSO.Buffer[_SSOTail] &amp; 0x8000)">{_SSO.StrPos,su}</DisplayString>
+    <DisplayString>{_SSO.Buffer,su}</DisplayString>
+    <StringView Condition="0 == (_SSO.Buffer[_SSOTail] &amp; 0x8000)">_SSO.StrPos,su</StringView>
+    <StringView>_SSO.Buffer,su</StringView>
+    <Expand>
+	<Item Name="length" Condition="0 == (_SSO.Buffer[_SSOTail] &amp; 0x8000)">_SSO.StrLen</Item>
+        <Item Name="length" Condition="0 != (_SSO.Buffer[_SSOTail] &amp; 0x8000)">size_t(_SSO.Buffer[_SSOTail] - 0x8000)</Item>
+	<Item Name="capacity" Condition="0 == (_SSO.Buffer[_SSOTail] &amp; 0x8000)">_SSO.MemLen - 1</Item>
+	<Item Name="capacity" Condition="0 != (_SSO.Buffer[_SSOTail] &amp; 0x8000)">sizeof(_SSO) / 2 - 2</Item>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::Vector&lt;*&gt;">
+    <DisplayString>{{ size={ArrEnd - ArrPos} }}</DisplayString>
+    <Expand>
+        <Item Name="size" ExcludeView="simple">ArrEnd - ArrPos</Item>
+        <Item Name="capacity" ExcludeView="simple">MemEnd - ArrPos</Item>
+        <ArrayItems>
+            <Size>ArrEnd - ArrPos</Size>
+            <ValuePointer>ArrPos</ValuePointer>
+        </ArrayItems>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::ListIterator&lt;*&gt;">
+    <Expand>
+        <Item Name="Prev">lpNode->Prev</Item>
+        <Item Name="Next">lpNode->Next</Item>
+        <Item Name="Data">lpNode->Data</Item>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::ListIterator_Const&lt;*&gt;">
+    <Expand>
+        <Item Name="Prev">lpNode->Prev</Item>
+        <Item Name="Next">lpNode->Next</Item>
+        <Item Name="Data">lpNode->Data</Item>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::List&lt;*&gt;">
+    <Expand>
+        <LinkedListItems>
+            <HeadPointer>EndPtr.Next</HeadPointer>
+            <NextPointer>Next</NextPointer>
+            <ValueNode>Data</ValueNode>
+        </LinkedListItems>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::Set&lt;*,*,*&gt;">
+  <Expand>
+    <TreeItems>
+      <Size>BaseTree.Size</Size>
+      <HeadPointer>(nsContainer::SetNode&lt;$T1&gt; *)BaseTree.lpRoot</HeadPointer>
+      <LeftPointer>(nsContainer::SetNode&lt;$T1&gt; *)Child[0]</LeftPointer>
+      <RightPointer>(nsContainer::SetNode&lt;$T1&gt; *)Child[1]</RightPointer>
+      <ValueNode>Data</ValueNode>
+    </TreeItems>
+  </Expand>
+</Type>
+
+<Type Name="nsContainer::Map&lt;*,*,*,*&gt;">
+  <Expand>
+    <TreeItems>
+      <Size>BaseTree.Size</Size>
+      <HeadPointer>(nsContainer::MapNode&lt;$T1,$T2&gt; *)BaseTree.lpRoot</HeadPointer>
+      <LeftPointer>(nsContainer::MapNode&lt;$T1,$T2&gt; *)Child[0]</LeftPointer>
+      <RightPointer>(nsContainer::MapNode&lt;$T1,$T2&gt; *)Child[1]</RightPointer>
+      <ValueNode>Data</ValueNode>
+    </TreeItems>
+  </Expand>
+</Type>
+
+<Type Name="nsContainer::HashSetNode&lt;*&gt;">
+    <Expand>
+        <LinkedListItems>
+            <HeadPointer>this</HeadPointer>
+            <NextPointer>Next</NextPointer>
+            <ValueNode>Data</ValueNode>
+        </LinkedListItems>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::HashMapNode&lt;*&gt;">
+    <Expand>
+        <LinkedListItems>
+            <HeadPointer>this</HeadPointer>
+            <NextPointer>Next</NextPointer>
+            <ValueNode>Data</ValueNode>
+        </LinkedListItems>
+    </Expand>
+</Type>
+
+<Type Name="nsMath::TinyVector&lt;*,*&gt;">
+    <Expand>
+        <ArrayItems>
+            <Size>$T2</Size>
+            <ValuePointer>Data</ValuePointer>
+        </ArrayItems>
+    </Expand>
+</Type>
+
+<Type Name="nsMath::Matrix_Base">
+    <Expand>
+        <Synthetic Name="Dimension">
+            <DisplayString>{_DimCount}</DisplayString>
+            <Expand>
+    	        <ArrayItems>
+                    <Size>_DimCount</Size>
+                    <ValuePointer>_DimArr</ValuePointer>
+                </ArrayItems>
+            </Expand>
+        </Synthetic>
+    </Expand>
+</Type>
+
+<Type Name="nsMath::Matrix&lt;*&gt;">
+    <Expand>
+        <Synthetic Name="Dimension">
+            <DisplayString>{_DimCount}</DisplayString>
+            <Expand>
+    	        <ArrayItems>
+                    <Size>_DimCount</Size>
+                    <ValuePointer>_DimArr</ValuePointer>
+                </ArrayItems>
+            </Expand>
+        </Synthetic>
+    	<ArrayItems Condition="_DimCount != 0">
+      	    <Direction>Forward</Direction> 
+      	    <Rank>_DimCount</Rank>
+      	    <Size>_DimArr[$i]</Size>
+      	    <ValuePointer>($T1*)lpData</ValuePointer> 
+    	</ArrayItems>
+    </Expand>
+</Type>
+
+<Type Name="nsMath::Polynomial_FR&lt;*,*&gt;">
+    <DisplayString Condition="nullptr == Coeff">0</DisplayString>
+    <Expand>
+        <ArrayItems Condition="nullptr != Coeff">
+            <Size>_degree + 1</Size>
+            <ValuePointer>Coeff</ValuePointer>
+        </ArrayItems>
+    </Expand>
+</Type>
+
+
+<Type Name="nsContainer::IntrvTreeMap&lt;*,*,*&gt;">
+  <Expand>
+    <TreeItems>
+      <Size>BaseTree.Size</Size>
+      <HeadPointer>(nsContainer::IntrvTreeMapNode&lt;$T1,$T2&gt; *)BaseTree.lpRoot</HeadPointer>
+      <LeftPointer>(nsContainer::IntrvTreeMapNode&lt;$T1,$T2&gt; *)Child[0]</LeftPointer>
+      <RightPointer>(nsContainer::IntrvTreeMapNode&lt;$T1,$T2&gt; *)Child[1]</RightPointer>
+      <ValueNode>Data</ValueNode>
+    </TreeItems>
+  </Expand>
+</Type>
+
+<Type Name="nsContainer::PointQuadtreeMapLeaf&lt;*,*&gt;">
+    <Expand>    
+        <ExpandedItem>Content</ExpandedItem>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::PointQuadtreeMapSubTree&lt;*,*&gt;">
+    <Expand>
+    	<Item Name="Center">Position_Center</Item>
+        <Item Name="Span">Span</Item>
+	<Item Name="Child x- y-" Condition="nullptr != lpChild[0] &amp;&amp; ($T1)0 == *lpChild[0]">(nsContainer::PointQuadtreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[0]</Item>
+	<Item Name="Child x- y-" Condition="nullptr != lpChild[0] &amp;&amp; ($T1)0 != *lpChild[0]">(nsContainer::PointQuadtreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[0]</Item>
+	<Item Name="Child x+ y-" Condition="nullptr != lpChild[1] &amp;&amp; ($T1)0 == *lpChild[1]">(nsContainer::PointQuadtreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[1]</Item>
+	<Item Name="Child x+ y-" Condition="nullptr != lpChild[1] &amp;&amp; ($T1)0 != *lpChild[1]">(nsContainer::PointQuadtreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[1]</Item>
+	<Item Name="Child x- y+" Condition="nullptr != lpChild[2] &amp;&amp; ($T1)0 == *lpChild[2]">(nsContainer::PointQuadtreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[2]</Item>
+	<Item Name="Child x- y+" Condition="nullptr != lpChild[2] &amp;&amp; ($T1)0 != *lpChild[2]">(nsContainer::PointQuadtreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[2]</Item>
+	<Item Name="Child x+ y+" Condition="nullptr != lpChild[3] &amp;&amp; ($T1)0 == *lpChild[3]">(nsContainer::PointQuadtreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[3]</Item>
+	<Item Name="Child x+ y+" Condition="nullptr != lpChild[3] &amp;&amp; ($T1)0 != *lpChild[3]">(nsContainer::PointQuadtreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[3]</Item>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::PointQuadtreeMap&lt;*,*&gt;">
+    <Expand>
+    	<Item Name="Item Count">NodeCount</Item>
+	<Item Name="Root" Condition="nullptr != lpRoot &amp;&amp; ($T1)0 == *lpRoot">(nsContainer::PointQuadtreeMapLeaf&lt;$T1,$T2&gt; *)lpRoot</Item>
+	<Item Name="Root" Condition="nullptr != lpRoot &amp;&amp; ($T1)0 != *lpRoot">(nsContainer::PointQuadtreeMapSubTree&lt;$T1,$T2&gt; *)lpRoot</Item>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::PointOctreeMapLeaf&lt;*,*&gt;">
+    <Expand>    
+        <ExpandedItem>Content</ExpandedItem>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::PointOctreeMapSubTree&lt;*,*&gt;">
+    <Expand>
+    	<Item Name="Center">Position_Center</Item>
+        <Item Name="Span">Span</Item>
+	<Item Name="Child x- y- z-" Condition="nullptr != lpChild[0] &amp;&amp; ($T1)0 == *lpChild[0]">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[0]</Item>
+	<Item Name="Child x- y- z-" Condition="nullptr != lpChild[0] &amp;&amp; ($T1)0 != *lpChild[0]">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[0]</Item>
+	<Item Name="Child x+ y- z-" Condition="nullptr != lpChild[1] &amp;&amp; ($T1)0 == *lpChild[1]">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[1]</Item>
+	<Item Name="Child x+ y- z-" Condition="nullptr != lpChild[1] &amp;&amp; ($T1)0 != *lpChild[1]">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[1]</Item>
+	<Item Name="Child x- y+ z-" Condition="nullptr != lpChild[2] &amp;&amp; ($T1)0 == *lpChild[2]">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[2]</Item>
+	<Item Name="Child x- y+ z-" Condition="nullptr != lpChild[2] &amp;&amp; ($T1)0 != *lpChild[2]">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[2]</Item>
+	<Item Name="Child x+ y+ z-" Condition="nullptr != lpChild[3] &amp;&amp; ($T1)0 == *lpChild[3]">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[3]</Item>
+	<Item Name="Child x+ y+ z-" Condition="nullptr != lpChild[3] &amp;&amp; ($T1)0 != *lpChild[3]">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[3]</Item>
+	<Item Name="Child x- y- z+" Condition="nullptr != lpChild[4] &amp;&amp; ($T1)0 == *lpChild[4]">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[4]</Item>
+	<Item Name="Child x- y- z+" Condition="nullptr != lpChild[4] &amp;&amp; ($T1)0 != *lpChild[4]">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[4]</Item>
+	<Item Name="Child x+ y- z+" Condition="nullptr != lpChild[5] &amp;&amp; ($T1)0 == *lpChild[5]">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[5]</Item>
+	<Item Name="Child x+ y- z+" Condition="nullptr != lpChild[5] &amp;&amp; ($T1)0 != *lpChild[5]">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[5]</Item>
+	<Item Name="Child x- y+ z+" Condition="nullptr != lpChild[6] &amp;&amp; ($T1)0 == *lpChild[6]">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[6]</Item>
+	<Item Name="Child x- y+ z+" Condition="nullptr != lpChild[6] &amp;&amp; ($T1)0 != *lpChild[6]">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[6]</Item>
+	<Item Name="Child x+ y+ z+" Condition="nullptr != lpChild[7] &amp;&amp; ($T1)0 == *lpChild[7]">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpChild[7]</Item>
+	<Item Name="Child x+ y+ z+" Condition="nullptr != lpChild[7] &amp;&amp; ($T1)0 != *lpChild[7]">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpChild[7]</Item>
+    </Expand>
+</Type>
+
+<Type Name="nsContainer::PointOctreeMap&lt;*,*&gt;">
+    <Expand>
+    	<Item Name="Item Count">NodeCount</Item>
+	<Item Name="Root" Condition="nullptr != lpRoot &amp;&amp; ($T1)0 == *lpRoot">(nsContainer::PointOctreeMapLeaf&lt;$T1,$T2&gt; *)lpRoot</Item>
+	<Item Name="Root" Condition="nullptr != lpRoot &amp;&amp; ($T1)0 != *lpRoot">(nsContainer::PointOctreeMapSubTree&lt;$T1,$T2&gt; *)lpRoot</Item>
+    </Expand>
+</Type>
+
+</AutoVisualizer>

@@ -1,0 +1,85 @@
+snd_stream {
+  "name":"piano",
+  "path":"piano.wav",
+  "volume":10.0
+}
+snd_stream {
+  "name":"bell",
+  "path":"BellProcessed.wav",
+  "volume":10.0
+}
+snd_stream {
+  "name":"woman_voice",
+  "path":"FemaleVoiceProcessed.wav",
+  "volume":15.0
+}
+snd_stream {
+  "name":"man_voice",
+  "path":"MaleVoiceProcessed.wav",
+  "volume":15.0
+}
+snd_stream {
+  "name":"bird",
+  "path":"BirdChirpDrySound.wav",
+  "volume":25.0
+}
+snd_stream {
+  "name":"water",
+  "path":"WaterDrippingDrySound.wav",
+  "volume":10.0
+}
+
+lobj sponza.obj
+cobj_all
+lanim Path_Listener.txt
+lanim Path_Source.txt
+
+clight { "type":"ambient"}
+clight {
+  "type":"point",
+  "position":[0.0,0.5,2.5],
+  "intensity":[2.0,2.0,2.0]
+}
+clight {
+  "type":"point",
+  "position":[3.0,0.0,3.0],
+  "intensity":[2.0,2.0,2.0]
+}
+clight {
+  "type":"point",
+  "position":[-10.0,0.0,1.0],
+  "intensity":[2.0,2.0,2.0]
+}
+
+snd_src {
+  "stream":"piano",
+  "position":[6.62389,1.22979,1.1]
+}
+snd_src {
+  "stream":"bell",
+  "position":[-2.5161,-3.18038,7.57454]
+}
+snd_src {
+  "stream":"woman_voice",
+  "position":[-12,-4,1.6],
+  "path":"Source_Woman"
+}
+snd_src {
+  "stream":"man_voice",
+  "position":[0,-5.4,1.7],
+  "path":"Source_Man"
+}
+snd_src {
+  "stream":"bird",
+  "position":[5.7,1.0,5.0],
+  "path":"Source_Bird"
+}
+snd_src {
+  "stream":"water",
+  "position":[-12.02195,4.49025,1.35]
+}
+
+listener {
+  "position":[8.87675667,-3.06509280,1.7],
+  "path":"ListenerCamera"
+}

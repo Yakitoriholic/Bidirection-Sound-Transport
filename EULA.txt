@@ -1,0 +1,24 @@
+End-User License Agreement
+
+This copy of BST_Release, including the executable computer programs, the source code, accompanying documentation, and any other files ("the Software") is licensed and not sold. This Software is protected by copyright laws and treaties, as well as laws and treaties related to other forms of intellectual property. The State Key Laboratory of CAD and CG, Zhejiang University ("CAD&CG Lab") owns intellectual property rights in the Software. The Licensee's ("you" or "your") license to use, copy or change the Software is subject to these rights and to all the terms and conditions of this End-User License Agreement (EULA).
+
+1. Acceptance
+BY INSTALLING, USING OR COPYING THE SOFTWARE, YOU AGREE TO BE BOUNDED BY THE TERMS OF THIS EULA. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS EULA, DO NOT INSTALL, USE OR COPY THE SOFTWARE.
+
+2. License Grant
+This EULA entitles you to install and use one copy of the Software. In addition, you may make one archival copy of the Software. The archival copy may only be used for restoration of the Software. This EULA does not permit the installation or use of the Software on more than one computer, on a system that allows shared use of applications, on a multi-user network, or on any configuration or system of computers that allow multiple users.
+
+3. Restrictions on Transfer
+You may not assign your rights and obligations under this EULA, or redistribute, encumber, sell, rent, lease, sublicense, or otherwise transfer your rights to the Software.
+
+4. Restrictions on Use
+You may not exercise any of the rights granted to You in this EULA in any manner that is primarily intended for or directed toward commercial advantage or private monetary compensation.
+
+5. Termination
+Without prejudice to any other rights, the Author of this Software may terminate this EULA if you fail to comply with the terms and conditions of this EULA. In such event, you must destroy all copies of the Software and all of its component parts.
+
+6. Disclaimer of Warranties
+CAD&CG LAB EXPRESSLY DISCLAIMS ANY WARRANTY FOR THE SOFTWARE. THE SOFTWARE AND ANY RELATED DOCUMENTATION IS PROVIDED ¡°AS IS¡± WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OR MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NONINFRINGEMENT. THE ENTIRE RISK ARISING OUT OF USE OR PERFORMANCE OF THE SOFTWARE REMAINS WITH YOU.
+
+7. Limitation of Liability
+IN NO EVENT SHALL CAD&CG LAB BE LIABLE FOR ANY SPECIAL, CONSEQUENTIAL, INCIDENTAL OR INDIRECT DAMAGES OF ANY KIND (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF THE USE OF OR INABILITY TO USE THIS SOFTWARE, EVEN IF CAD&CG LAB IS AWARE OF THE POSSIBILITY OF SUCH DAMAGES AND KNOWN DEFECTS.

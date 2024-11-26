@@ -1,0 +1,560 @@
+newmtl Wood_Door
+	Ns 30.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.45000 0.45000 0.45000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\wood.jpg
+	map_Kd Texture\wood.jpg
+  Kd_snd 0.9 0.9 0.9 0.9 0.9 0.9 0.9 0.9
+  
+newmtl Floor
+	Ns 40.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.43137 0.43137 0.43137
+	Kd 0.43137 0.43137 0.43137
+	Ks 0.36000 0.36000 0.36000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\tile_floor.png
+	map_Kd Texture\tile_floor.png
+
+newmtl Ceil
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl wire_006135113
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.02353 0.52941 0.44314
+	Kd 0.02353 0.52941 0.44314
+	Ks 0.35000 0.35000 0.35000
+
+newmtl Carpet
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\carpet.jpg
+	map_Kd Texture\carpet.jpg
+	map_bump Texture\carpet_bump.png
+	bump Texture\carpet_bump.png
+
+newmtl Material__84
+	Ns 25.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.69804 0.80784 1.00000
+	Kd 0.69804 0.80784 1.00000
+	Ks 0.36000 0.36000 0.36000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl wire_177028149
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.69412 0.10980 0.58431
+	Kd 0.69412 0.10980 0.58431
+	Ks 0.35000 0.35000 0.35000
+
+newmtl LightShade
+	Ns 0.00000
+	Ni 1.50000
+	d 0.90000
+	Tr 0.10000
+	Tf 0.90000 0.90000 0.90000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl Skirting
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl Window
+	Ns 25.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl WindowGlass
+	Ns 100.00000
+	Ni 1.50000
+	d 0.10000
+	Tr 0.90000
+	Tf 0.10000 0.10000 0.10000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.90000 0.90000 0.90000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl FullWhite
+	Ns 5.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.66275 0.66275 0.66275
+	Kd 0.66275 0.66275 0.66275
+	Ks 0.10000 0.10000 0.10000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl RoomNumber2_Face
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\RoomNumberF2.png
+	map_Kd Texture\RoomNumberF2.png
+
+newmtl ChromeMetal
+	Ns 100.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.90000 0.90000 0.90000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl SmallPhotoFrame
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl SmallPhoto3_Pic
+	Ns 66.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.67500 0.67500 0.67500
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\grove.jpg
+	map_Kd Texture\grove.jpg
+
+newmtl SmallPhoto2_Pic
+	Ns 66.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.67500 0.67500 0.67500
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\walkway.jpg
+	map_Kd Texture\walkway.jpg
+
+newmtl SmallPhoto1_Pic
+	Ns 66.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.67500 0.67500 0.67500
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\ocean.jpg
+	map_Kd Texture\ocean.jpg
+
+newmtl Poster1_Face
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\Poster1.png
+	map_Kd Texture\Poster1.png
+
+newmtl Poster2_Face
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\Poster2.png
+	map_Kd Texture\Poster2.png
+
+newmtl Material__13
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.00000 0.00000 0.00000
+	Ke 1.00000 1.00000 1.00000
+
+newmtl ExitSign_Sign
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.00000 0.00000 0.00000
+	Ke 1.00000 1.00000 1.00000
+	map_Ka Texture\exit_sign.png
+	map_Kd Texture\exit_sign.png
+	map_Ke Texture\exit_sign.png
+
+newmtl CorridorWall
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\wallpaper.png
+	map_Kd Texture\wallpaper.png
+	map_bump Texture\wallpaper_bump.png
+	bump Texture\wallpaper_bump.png
+
+newmtl StairWall
+	Ns 100.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.27000 0.27000 0.27000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\tile_wall.png
+	map_Kd Texture\tile_wall.png
+	map_refl Texture\tile_wall.png
+
+newmtl RoomWall_Brick
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\wall.png
+	map_Kd Texture\wall.png
+	map_bump Texture\wall_bump.png
+	bump Texture\wall_bump.png
+
+newmtl RoomWall
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.50588 0.54118 1.00000
+	Kd 0.50588 0.54118 1.00000
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl wire_255255255
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.35000 0.35000 0.35000
+
+newmtl Cloth_Gray
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\canvas_gray.png
+	map_Kd Texture\canvas_gray.png
+	map_bump Texture\canvas_bump.png
+	bump Texture\canvas_bump.png
+
+newmtl FloorPlan2_Face
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\FloorPlan2.png
+	map_Kd Texture\FloorPlan2.png
+
+newmtl wire_115115115
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.45098 0.45098 0.45098
+	Kd 0.45098 0.45098 0.45098
+	Ks 0.35000 0.35000 0.35000
+
+newmtl Cloth_Yellow
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\canvas.png
+	map_Kd Texture\canvas.png
+	map_bump Texture\canvas_bump.png
+	bump Texture\canvas_bump.png
+
+newmtl Cloth_Cushion
+	Ns 0.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\soft_fabric.png
+	map_Kd Texture\soft_fabric.png
+	map_bump Texture\soft_fabric.png
+	bump Texture\soft_fabric.png
+
+newmtl Copper
+	Ns 79.99999
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.79608 0.51373 0.19608
+	Kd 0.79608 0.51373 0.19608
+	Ks 0.90000 0.90000 0.90000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl FloorLampShade
+	Ns 25.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.78431 0.70196 0.51765
+	Kd 0.78431 0.70196 0.51765
+	Ks 0.45000 0.45000 0.45000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl wire_176026026
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.69020 0.10196 0.10196
+	Kd 0.69020 0.10196 0.10196
+	Ks 0.35000 0.35000 0.35000
+
+newmtl White_Matted
+	Ns 50.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 1.00000 1.00000 1.00000
+	Kd 1.00000 1.00000 1.00000
+	Ks 0.45000 0.45000 0.45000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl wire_008008136
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.03137 0.03137 0.53333
+	Kd 0.03137 0.03137 0.53333
+	Ks 0.35000 0.35000 0.35000
+
+newmtl Wood_Floor
+	Ns 50.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.63000 0.63000 0.63000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\oak_floor.png
+	map_Kd Texture\oak_floor.png
+
+newmtl RoomNumber1_Face
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\RoomNumberF1.png
+	map_Kd Texture\RoomNumberF1.png
+
+newmtl Black_Plastic
+	Ns 50.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.00392 0.00392 0.00392
+	Kd 0.00392 0.00392 0.00392
+	Ks 0.45000 0.45000 0.45000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl Dark_Plastic
+	Ns 50.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.12157 0.12157 0.12157
+	Kd 0.12157 0.12157 0.12157
+	Ks 0.45000 0.45000 0.45000
+	Ke 0.00000 0.00000 0.00000
+
+newmtl Barrier_Rope_Cloth
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.74118 0.16078 0.18039
+	Kd 0.74118 0.16078 0.18039
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_bump Texture\canvas_bump.png
+	bump Texture\canvas_bump.png
+
+newmtl FloorPlan1_Face
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka Texture\FloorPlan1.png
+	map_Kd Texture\FloorPlan1.png
