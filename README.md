@@ -1,4 +1,8 @@
-
+@author: CAO Chunxiao
+BST Release is a sound transport demo with an implementation of the Bidirection Sound Transport
+algorithm. The implementation is not intended for practical use, and the code quality is very low. For any
+practical application, we recommend the programmer to implement his/her own sound renderer according
+to the algorithm description in our paper.
 
 使用方法：
 1.	编译
