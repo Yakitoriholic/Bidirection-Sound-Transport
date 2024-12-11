@@ -7,7 +7,7 @@ practical application, we recommend the programmer to implement his/her own soun
 to the algorithm description in our paper.
 
 使用方法：
-1.	编译
+1.编译
 
 a)	运行BST_Release.vcvproj文件，配置环境
 
