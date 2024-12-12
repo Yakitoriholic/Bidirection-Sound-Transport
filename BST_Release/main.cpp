@@ -1,36 +1,34 @@
-﻿#include "main.hpp"
+#include "main.hpp"
 
-nsGUIText::FontRaster *Font1, *Font2;//字体指针
+nsGUIText::FontRaster *Font1, *Font2;
 
-nsBasic::ObjGeneral *Screen;//屏幕对象指针
+nsBasic::ObjGeneral *Screen;
 
-//按钮和复选框指针
 nsGUI::Button *BtnScene, *BtnSrc, *BtnPlay, *BtnRecord, *BtnRecordOffline, *BtnFrameTest;
 nsGUI::CheckBox *ChkShowIR, *ChkOutputEC;
-//屏幕矩形和状态变量声明
 nsGUI::Rect ScreenRect;
 UBINT ScreenStat, LastMouseX, LastMouseY;
-//3D和2D场景对象指针声明
+
 nsBasic::ObjGeneral *Scene_3D, *Scene_2D, *MyEventHdlr;
 nsBasic::ObjSet *My3DScene, *MyCtrlScene;
-//音频输出流指针声明
+
 nsAudio::OutputStream *MySndOutputStream;
-//文件对话框模板声明
+
 OPENFILENAME DialogTemplate;
 
-UBCHAR FilePath[260] = L"";/*文件路径*/
+UBCHAR FilePath[260] = L"";
 
-nsMath::TinyVector<float, 3> InitialRayPos[PathCnt];/*射线位置数组*/
+nsMath::TinyVector<float, 3> InitialRayPos[PathCnt];
+float *HitEnergyByBounce;
 
-float *HitEnergyByBounce;//HitEnergyBounce存储每次反弹的能量
-volatile UBINT ECFrameCnt = 0;//ECFrameCnt，ECFrameCnt_Max跟踪帧计数的变量
+volatile UBINT ECFrameCnt = 0;
 UBINT ECFrameCnt_Max = 0;
 
 //Synchronization
-volatile UBINT RecordFlag = 0, ExeStopFlag = 0, OutputEC = 0;//用于控制录音，执行停止和输出的操作
+volatile UBINT RecordFlag = 0, ExeStopFlag = 0, OutputEC = 0;
 nsBasic::CyclicBarrier RTBarrier1, RTBarrier2;
 
-bool Playing = false, ShowIR = false;    //用于控制状态和是否显示IR
+bool Playing = false, ShowIR = false;
 
 template <typename T> class DoubleBuffer{
 private:
@@ -41,7 +39,7 @@ private:
 	T *WriteQueue[2];
 	UBINT ReaderCount[2];
 
-	nsBasic::Mutex SyncMutex; 
+	nsBasic::Mutex SyncMutex;
 public:
 	template <typename ... Args> DoubleBuffer(Args ... args) :Resource1(args...), Resource2(args...){
 		this->ReaderCount[0] = 0;
@@ -129,11 +127,10 @@ public:
 
 DoubleBuffer<Listener> *lpListenerPair = nullptr;
 
-struct HDRFilterStat{//结构体实现了一个复杂的音频信号处理链，用于动态调整音频信号的动态范围，使其适应不同的播放环境
+struct HDRFilterStat{
 	static const UBINT RMSWndLen = 0x200; // the window length must be the power of 2.
-												//定义了用于计算均方根（RMS）的窗口长度。它被设置为 512（0x200）
 
-	float RMSWnd[RMSWndLen];//存储RMS计算窗口中的样本值。
+	float RMSWnd[RMSWndLen];
 	float RMSValue;
 	UBINT RMSWndPtr;
 
@@ -142,7 +139,7 @@ struct HDRFilterStat{//结构体实现了一个复杂的音频信号处理链，
 	float Value_Compressor_Stage3;
 	float Value_Limiter;
 
-	void Initialize(){//将数组置零的函数
+	void Initialize(){
 		nsMath::setzero_simd_unaligned(RMSWnd, RMSWndLen);
 		this->RMSValue = 0.0f;
 		this->RMSWndPtr = 0;
@@ -244,16 +241,15 @@ void *SoundRayTraceThread(void *lpArg){
 	DoubleBuffer<Listener> MyRendererPair;
 	Listener *lpCurListener;
 
-	atomic_xchg((UBINT *)&lpListenerPair, (UBINT)&MyRendererPair);//交换lpListenerPair和MyRendererPair的地址
+	atomic_xchg((UBINT *)&lpListenerPair, (UBINT)&MyRendererPair);
 
-	const UBINT NeighborCnt = 64;//?????用于控制搜索范围？？？？？？？？？？
+	const UBINT NeighborCnt = 64;
 	const UBINT RandBufferSize = std::max(PathCnt, ConnectionCount);
 	float *DestPos = MyCameraData.Position;
 
 	nsMath::RandGenerator_XORShiftPlus MyRand;
 
-	PathTracer MyPathTracer((float)IRLength / (float)AudioSampleRate, IterateTimes);  //输入:最大延迟时间：IR长度和音频采样率
-																						//IterateTimes： 射线允许的反射和折射次数
+	PathTracer MyPathTracer((float)IRLength / (float)AudioSampleRate, IterateTimes);
 
 	while (true){
 		RTBarrier1.Wait();
@@ -274,21 +270,21 @@ void *SoundRayTraceThread(void *lpArg){
 				nsBasic::GetAccurateTimeCntr(&Time_Start);
 #endif
 
-				MyPathTracer.PathAllocate(MySoundClusterMgr, PathCnt, ConnectionCount);//根据声源集群和听者集群的数量以及指定的路径数和连接数来分配路径和连接
+				MyPathTracer.PathAllocate(MySoundClusterMgr, PathCnt, ConnectionCount);
 
 #if defined PERFORMANCE_TEST
 				nsBasic::GetAccurateTimeCntr(&Time_End);
 				Time_Allocate_Total += Time_End - Time_Start;
 				Time_Start = Time_End;
 #endif
-				MyPathTracer.LoadSoundClusters(MySoundClusterMgr);//负责从 SoundClusterMgr 管理器中加载声音集群信息，并根据这些信息初始化路径追踪器的状态。
+				MyPathTracer.LoadSoundClusters(MySoundClusterMgr);
 
 #if defined PERFORMANCE_TEST
 				nsBasic::GetAccurateTimeCntr(&Time_End);
 				Time_Allocate_Total += Time_End - Time_Start;
 				Time_Start = Time_End;
 #endif
-				MyPathTracer.Trace();//执行声音路径追踪算法
+				MyPathTracer.Trace();
 
 #if defined PERFORMANCE_TEST
 				nsBasic::GetAccurateTimeCntr(&Time_End);
@@ -296,14 +292,14 @@ void *SoundRayTraceThread(void *lpArg){
 				Time_Start = Time_End;
 #endif
 
-				MyPathTracer.Connect();//执行声音路径的连接处理
+				MyPathTracer.Connect();
 
 #if defined PERFORMANCE_TEST
 				nsBasic::GetAccurateTimeCntr(&Time_End);
 				Time_Connect_Total += Time_End - Time_Start;
 				Time_Start = Time_End;
 #endif
-				MyPathTracer.Output(MySoundClusterMgr);//	根据路径追踪的结果生成声音输出
+				MyPathTracer.Output(MySoundClusterMgr);
 
 #if defined PERFORMANCE_TEST
 				nsBasic::GetAccurateTimeCntr(&Time_End);
@@ -311,7 +307,7 @@ void *SoundRayTraceThread(void *lpArg){
 				Time_Start = Time_End;
 #endif
 
-				MyPathTracer.PostProcess(MySoundClusterMgr);//处理与听者集群相关的声音输出，确保声音数据被正确地设置和渲染
+				MyPathTracer.PostProcess(MySoundClusterMgr);
 
 #if defined PERFORMANCE_TEST
 				nsBasic::GetAccurateTimeCntr(&Time_End);
@@ -373,10 +369,8 @@ void *SoundRayTraceThread(void *lpArg){
 
 	return nullptr;
 }
-
-
-void *SoundRenderThread(void *lpArg){//渲染声音
-	float Result_L[SndWndLen], Result_R[SndWndLen];//存储左右耳声道
+void *SoundRenderThread(void *lpArg){
+	float Result_L[SndWndLen], Result_R[SndWndLen];
 	float LerpFactor[SndWndLen];
 	for (UBINT i = 0; i < SndWndLen; i++)LerpFactor[i] = (float)i / (float)SndWndLen;
 	short *SndBuffer;
@@ -386,7 +380,7 @@ void *SoundRenderThread(void *lpArg){//渲染声音
 
 	// HDR filter
 	
-	HDRFilterStat HDRFilterStat_L, HDRFilterStat_R;  //HDR过滤的状态结构
+	HDRFilterStat HDRFilterStat_L, HDRFilterStat_R;
 
 	HDRFilterStat_L.Initialize();
 	HDRFilterStat_R.Initialize();
@@ -883,10 +877,9 @@ extern UBINT _cdecl MsgProc_Screen(nsBasic::ObjGeneral *lpObj, UBINT Msg, ...){
 }
 
 extern int UserMain(){
-	
-	nsBasic::CreateThreadExtObj();  //创建了线程扩展对象
+	nsBasic::CreateThreadExtObj();
 
-	DialogTemplate.lStructSize = sizeof(OPENFILENAME);////文件对话框
+	DialogTemplate.lStructSize = sizeof(OPENFILENAME);
 	DialogTemplate.hwndOwner = NULL;
 	DialogTemplate.hInstance = (HINSTANCE)nsEnv::InstanceID;
 	DialogTemplate.lpstrCustomFilter = NULL;
@@ -902,52 +895,45 @@ extern int UserMain(){
 	DialogTemplate.dwReserved = 0;
 	DialogTemplate.FlagsEx = 0;
 
-	//创建和配置MyEventHdlr，使其能够接收和处理发送到 IO_USER 端口的消息
-	MyEventHdlr = new nsBasic::ObjGeneral(nullptr, MyEventHdlrProc); 
+	MyEventHdlr = new nsBasic::ObjGeneral(nullptr, MyEventHdlrProc);
 	nsBasic::SetMsgPort(&(nsBasic::GetThreadExtInfo()->MsgManager), MyEventHdlr, IO_USER);
 
-	ScreenRect.XMin = 20;//设置窗口
+	ScreenRect.XMin = 20;
 	ScreenRect.YMin = 20;
 	ScreenRect.XMax = 820;
 	ScreenRect.YMax = 620;
 	nsGUI::LoadWindowMgr();
 
-	//创建MyWnd 窗口对象，并配置为接收和处理视频输出相关的消息
-	nsGUI::GLWindow MyWnd(&ScreenRect);	
+	nsGUI::GLWindow MyWnd(&ScreenRect);
 	nsBasic::SetMsgPort(&(nsBasic::GetThreadExtInfo()->MsgManager), (nsBasic::ObjGeneral *)&MyWnd, IO_VIDEO_OUT);
 
-	//创建控制器对象，并配置为接收和处理键盘，鼠标和输入法编辑器IME相关消息
-	nsGUI::ControlManager MyCtrlMgr;		
-	nsBasic::SetMsgPort(&(nsBasic::GetThreadExtInfo()->MsgManager), (nsBasic::ObjGeneral *)&MyCtrlMgr, IO_KEYBD);// 键盘
-	nsBasic::SetMsgPort(&(nsBasic::GetThreadExtInfo()->MsgManager), (nsBasic::ObjGeneral *)&MyCtrlMgr, IO_MOUSE);//鼠标
-	nsBasic::SetMsgPort(&(nsBasic::GetThreadExtInfo()->MsgManager), (nsBasic::ObjGeneral *)&MyCtrlMgr, IO_IME);//输入法编辑器IME
+	nsGUI::ControlManager MyCtrlMgr;
+	nsBasic::SetMsgPort(&(nsBasic::GetThreadExtInfo()->MsgManager), (nsBasic::ObjGeneral *)&MyCtrlMgr, IO_KEYBD);
+	nsBasic::SetMsgPort(&(nsBasic::GetThreadExtInfo()->MsgManager), (nsBasic::ObjGeneral *)&MyCtrlMgr, IO_MOUSE);
+	nsBasic::SetMsgPort(&(nsBasic::GetThreadExtInfo()->MsgManager), (nsBasic::ObjGeneral *)&MyCtrlMgr, IO_IME);
 
-	//MyTextEngine应用程序中加载和管理字体
-	nsGUIText::FontEngine MyTextEngine;//用于管理字体
+	nsGUIText::FontEngine MyTextEngine;
 
-	//获取系统字体文件夹的路径，并从中加载两种不同大小的 cour 字体文件
-	wchar_t FontFolderPath[260];//用于存储字体文件夹的路径
+	wchar_t FontFolderPath[260];
 	SHGetSpecialFolderPath(nullptr, FontFolderPath, CSIDL_FONTS, FALSE);
-	nsText::String_Sys FontFolderPath_StrSys(FontFolderPath);//从宽字符数组转换为系统字符串
+	nsText::String_Sys FontFolderPath_StrSys(FontFolderPath);
 	nsText::String FontFolderPath_Str1(FontFolderPath_StrSys), FontFolderPath_Str2(FontFolderPath_Str1);
 	FontFolderPath_Str1 += "\\cour.ttf";
 	FontFolderPath_Str2 += "\\courbd.ttf";
 	Font1 = MyTextEngine.CreateFontRaster((const char *)FontFolderPath_Str1.cbegin(), 12);
 	Font2 = MyTextEngine.CreateFontRaster((const char *)FontFolderPath_Str2.cbegin(), 24);
-	
-	//创建一个3D场景对象，父对象：MyWnd  消息处理函数： nsGUI::MsgProc_GL3DScene 来处理场景消息。
+
 	My3DScene = new nsBasic::ObjSet((nsBasic::ObjSet *)&MyWnd, nsGUI::MsgProc_GL3DScene);
-	//创建3D对象，父对象： My3DScene  消息处理函数： MsgProc_Scene_3D 来处理场景消息。
-	Scene_3D = new nsBasic::ObjGeneral(My3DScene, MsgProc_Scene_3D);//
+	Scene_3D = new nsBasic::ObjGeneral(My3DScene, MsgProc_Scene_3D);
 
 	Scene_2D = new nsBasic::ObjGeneral((nsBasic::ObjSet *)&MyWnd, MsgProc_Scene_2D);
 
 	MyCtrlScene = new nsBasic::ObjSet((nsBasic::ObjSet *)&MyWnd, nsGUI::MsgProc_GLCtrlScene);
 
 	Screen = new nsBasic::ObjGeneral(MyCtrlScene, MsgProc_Screen);
-	nsGUI::RectHitRgn *ScreenRgn = new nsGUI::RectHitRgn((nsBasic::ObjSet *)&MyCtrlMgr, Screen, &ScreenRect);//ScreenRgn用于处理用户在特定区域内的点击时间
+	nsGUI::RectHitRgn *ScreenRgn = new nsGUI::RectHitRgn((nsBasic::ObjSet *)&MyCtrlMgr, Screen, &ScreenRect);
 
-	SndClusterCtrl = new ClusterCtrl(MyCtrlScene);  //SndClusterCtrl用于控制声音集群
+	SndClusterCtrl = new ClusterCtrl(MyCtrlScene);
 	SndClusterCtrl->RegisterHitRgn((nsBasic::ObjSet *)&MyCtrlMgr);
 
 	BtnScene = new nsGUI::Button((nsBasic::ObjSet *)MyCtrlScene);
@@ -1012,24 +998,20 @@ extern int UserMain(){
 	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	Embree_Init();//初始化 Embree 库
+	Embree_Init();
 
-	
-	//nsAudio::OutputDevice_WASAPI MySndOutputDevice;	//此处为输出设备的API格式，DS格式和WASAPI格式 
-	nsAudio::OutputDevice_DS MySndOutputDevice;				//DS格式   /*DS支持耳机，而WASAPI要求音频缓存格式和系统内部格式一致。*/
-
-	MySndOutputStream = MySndOutputDevice.CreateStream_Output<INT2b>(2, SndWndLen, AudioSampleRate);//通道数 ，缓冲区长度，采样率
-
-	UBINT hSoundRenderThread = nsBasic::CreateNormalThread(SoundRenderThread, nullptr);//创建线程hSoundRenderThread ， 处理音频数据并输出到扬声器
-	RTBarrier1.Initialize(2);//初始化 RTBarrier1，设置需要等待的线程数为2
+	nsAudio::OutputDevice_WASAPI MySndOutputDevice;
+	MySndOutputStream = MySndOutputDevice.CreateStream_Output<INT2b>(2, SndWndLen, AudioSampleRate);
+	UBINT hSoundRenderThread = nsBasic::CreateNormalThread(SoundRenderThread, nullptr);
+	RTBarrier1.Initialize(2);
 	RTBarrier2.Initialize(2);
-	UBINT hSoundRayTraceThread = nsBasic::CreateNormalThread(SoundRayTraceThread, nullptr);//创建线程hSoundRayTraceThread,计算声音在环境中的传播和反射
+	UBINT hSoundRayTraceThread = nsBasic::CreateNormalThread(SoundRayTraceThread, nullptr);
 
 	RenderManager = new nsRender::RenderCore(MyWnd.GetGraphicDevice());
 	InitDefaultScene();
 
-	MyWnd.Show();        //显示界面
-	nsGUI::SimpleMsgPump();  //消息泵，用来GUI交互
+	MyWnd.Show();
+	nsGUI::SimpleMsgPump();
 
 	atomic_xchg(&ExeStopFlag, 1);
 	MySndOutputStream->Stop();
@@ -1037,7 +1019,7 @@ extern int UserMain(){
 	RTBarrier1.Wait();
 	nsBasic::WaitThread(hSoundRayTraceThread);
 
-	ClearScene();  //图形渲染
+	ClearScene();
 	delete RenderManager;
 
 	Embree_Destroy();
