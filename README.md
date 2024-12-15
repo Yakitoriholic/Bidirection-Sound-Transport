@@ -1,6 +1,6 @@
 # Bidirection Sound Transport
 ### @author: CAO Chunxiao
-### @revisor：Xing Zihan
+### @revisor: Xing Zihan
 
 Author:"BST Release is a sound transport demo with an implementation of the Bidirection Sound Transport
 algorithm. The implementation is not intended for practical use, and the code quality is very low. For any
